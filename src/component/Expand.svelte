@@ -10,6 +10,9 @@
             stateTracker.set(`exp${cur}`,false)
             style += 
             `
+            .exp-ch${cur}{
+                display:none;
+            }
             .exp${cur}{
                 display:inline-block;
             }
@@ -21,8 +24,9 @@
             //map.set(expandParent,expandChild)
             for(let i=0;i<expandParent.length;i++){
                 expandParent[i].addEventListener("click",()=>{
+                    console.log("lol",stateTracker)
                     stateTracker.set(`exp${cur}`,!stateTracker.get(`exp${cur}`))
-                    if(stateTracker.get(`exp${cur}`)){
+                    if(!stateTracker.get(`exp${cur}`)){
                         for(let j = 0;j<expandChild.length;j++){
                             expandChild[j].classList.remove(`exp${cur}`)
                             expandChild[j].classList.add(`no-exp${cur}`)
