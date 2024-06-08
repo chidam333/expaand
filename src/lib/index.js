@@ -1,2 +1,2 @@
 // Reexport your entry components here
-export {Expand} from "./Expand.svelte";
+export {default as Expand} from "./Expand.svelte";

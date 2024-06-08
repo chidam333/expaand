@@ -8,7 +8,7 @@
             let expandParent = document.getElementsByClassName(`exp-par${cur}`)
             if(expandParent.length==0) break;
             stateTracker.set(`exp${cur}`,false)
-            style += 
+            style +=
             `
             .exp-ch${cur}{
                 display:none;

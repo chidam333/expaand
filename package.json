@@ -1,6 +1,6 @@
 {
 	"name": "expaand",
-	"version": "0.0.12",
+	"version": "0.0.15",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -16,6 +16,9 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
+		},
+		"./Expand.svelte": {
+			"svelte": "./dist/Expand.svelte"
 		}
 	},
 	"files": [
@@ -44,6 +47,6 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"expaand": "^0.0.1"
+		"expaand": "^0.0.15"
 	}
 }
