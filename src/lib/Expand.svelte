@@ -1,8 +1,15 @@
 <script>
 	import { onMount } from "svelte";
+    let stateTracker = new Map()
+    export function exPlus(cur){
+        stateTracker.set(cur,stateTracker.get(cur)+1)
+    }
+    export function exReduce(cur){
+        let newVal = stateTracker.get(cur)-1<=0 ? 0 : stateTracker.get(cur)-1 
+        stateTracker.set(cur,newVal)
+    }
     onMount(()=>{
         let map = new Map()
-        let stateTracker = new Map()
         let style = "";
         // rewrite starts
         collectParent(1)
@@ -15,7 +22,7 @@
                     return (x.slice(0,9)=='exp-state');
                 });
                expandState = expandState ?? "exp-state-0";
-               let state = parseInt(expandState.slice(10,))
+               let state = Number(expandState.slice(10,))
                console.log({state})
                stateTracker.set(`exp${cur}`,state);
                style += 
@@ -50,26 +57,26 @@
                     if(stateTracker.get(`exp${cur}`)>0){
                         stateTracker.set(`exp${cur}`,stateTracker.get(`exp${cur}`)-1)
                         if(stateTracker.get(`exp${cur}`)==0){
-                            hideChilds(childNodes)
+                            hideChilds(childNodes,cur)
                         }
                     }else{
                         stateTracker.set(`exp${cur}`,1)
-                        displayChilds(childNodes)
+                        displayChilds(childNodes,cur)
                     }
                 }
                 
             )
         }
-        function hideChilds(childNodes){
+        function hideChilds(childNodes,cur){
             for(let n of childNodes){
-                childNodes[n].classList.remove(`no-exp${cur}`)
-                childNodes[n].classList.add(`exp${cur}`)
+                n.classList.remove(`no-exp${cur}`)
+                n.classList.add(`exp${cur}`)
             }
         }
-        function displayChilds(childNodes){
+        function displayChilds(childNodes,cur){
             for(let n of childNodes){
-                childNodes[n].classList.remove(`no-exp${cur}`)
-                childNodes[j].classList.add(`exp${cur}`)
+                n.classList.remove(`no-exp${cur}`)
+                n.classList.add(`exp${cur}`)
             }
         }
         // rewrite ends
@@ -117,9 +124,10 @@
         // styleElement.innerText = style
         // document.head.appendChild(styleElement)
     })
+    let expele;
 </script>
 <main>
-    <slot/>
+    <slot {exReduce}/>
 </main>
 <style>
 </style>
